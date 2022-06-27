@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace Mini_Calculator_2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        Start:
+            double value1 = InputValue("first");
+            double value2 = InputValue("second");
+            WriteLine();
+
+
+        Decision:
+            string operand = OperationPerformed();
+
+            switch (operand)
+            {
+                case "addition":
+                case "+":
+                    WriteLine("The sum of {0} and {1} is {2}.", value1, value2, value1 + value2);
+                    break;
+                case "subtraction":
+                case "-":
+                    WriteLine("The subtraction of {0} by {1} is {2}.", value1, value2, value1 - value2);
+                    break;
+                case "multiplication":
+                case "*":
+                    WriteLine("The multiplication of {0} and {1} is {2}.", value1, value2, value1 * value2);
+                    break;
+                case "division":
+                case "/":
+                    WriteLine("The division of {0} by {1} is {2}.", value1, value2, value1 / value2);
+                    break;
+                default:
+                    WriteLine("Please enter an operand to perform the calculation.");
+                    goto Decision;
+            }
+
+        DoYouWantToContinue:
+            string userInput = UserChoice();
+
+            switch (userInput)
+            {
+                case "Yes":
+                case "yes":
+                    goto Start;
+                case "No":
+                case "no":
+                    WriteLine("Goodbye");
+                    break;
+                default:
+                    WriteLine("You have entered {0}. Please enter a no or yes anser.", userInput);
+                    goto DoYouWantToContinue;
+
+            }
+            ReadLine();  
+        }
+        public static double InputValue(string decision)
+        {
+            WriteLine("Please enter the {0} value to use for calculation", decision);
+            double inputCalculated = double.Parse(ReadLine());
+            return inputCalculated;
+        }
+
+        public static string OperationPerformed()
+        {
+            string operation = "";
+            WriteLine("Please identify the operation you will be using");
+            WriteLine("Enter '+' or type 'addition' for addition.");
+            WriteLine("Enter - or type 'subtraction' for subtration.");
+            WriteLine("Enter '*' or type 'multiplication' for multiplication.");
+            WriteLine("Enter '/' or type 'multiplication' for addition operation.");
+            operation = ReadLine();
+            return operation;
+        }
+        public static string UserChoice()
+        {
+            WriteLine("Do you wish to continue? Please enter a yes or no");
+            string inputChoice = ReadLine();
+
+            return inputChoice;
+        }
+
+    }
+}
